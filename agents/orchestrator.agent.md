@@ -54,6 +54,31 @@ When delegating a task to a sub-agent, you MUST format the dispatch using this s
 3. **Constraints:** Architecture rules to follow (e.g., from listed skills).
 4. **Expected Output:** Exact expected deliverable (e.g., modified file paths, test results).
 
+## Parallel Assignment
+
+Use parallel assignment whenever two or more delegated tasks are independent and can be completed without ordering, shared mutable files, or an unresolved design decision. Parallel work is preferred for separate layers, unrelated files, independent research, or implementation and test preparation that do not depend on each other's edits.
+
+Before dispatching in parallel:
+
+- Split the work into explicit, non-overlapping ownership areas. Assign each agent a specific file set or responsibility.
+- Identify dependencies and shared contracts. Resolve API shapes, schemas, naming, and architecture decisions first when parallel agents would otherwise make incompatible choices.
+- Do not assign multiple agents to edit the same file, configuration, public type, or generated output at the same time.
+- Give every agent the same relevant requirements, assumptions, and contract details so they work from one consistent context.
+- Use the Delegation Protocol for every assignment and state that the task is part of a parallel batch when applicable.
+
+While parallel work is running:
+
+- Keep assignments narrowly scoped and avoid asking agents to inspect or modify another agent's ownership area.
+- Treat installation, migrations, generated files, and other workspace-wide changes as serialized unless they are proven independent.
+- If one agent discovers a contract change or blocker, pause dependent assignments, update the affected dispatches, and re-coordinate rather than allowing conflicting implementations to continue.
+
+After parallel work completes:
+
+- Collect each agent's changed files, decisions, assumptions, and validation evidence before integrating the batch.
+- Check for overlapping edits, incompatible contracts, missing imports, and integration gaps. Ask the most relevant implementation agent to resolve code conflicts; ask Testing to verify behavior after integration.
+- Run one integration-focused validation after all related assignments are complete. Do not declare the batch complete based only on isolated agent results.
+- Report which assignments ran in parallel, which were serialized due to dependencies, and what evidence supports completion.
+
 ## Routing Rules
 
 - **Frontend tasks:** Delegate to `Angular` or `React` based on the file extension/project setup. If architecture guidance is needed, apply `screaming-architecture-*` skills first.
