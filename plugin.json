@@ -1,7 +1,7 @@
 {
   "name": "mysimpleaiplugin",
   "description": "Run different AI agents for various tasks. Every agent has a specific role and can be orchestrated to work together efficiently. Agents and Skills are focused on React, Angular and Nestjs development.",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "keywords": [
     "multi-agent",
     "project-management",

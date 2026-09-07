@@ -56,28 +56,17 @@ When delegating a task to a sub-agent, you MUST format the dispatch using this s
 
 ## Parallel Assignment
 
-Use parallel assignment whenever two or more delegated tasks are independent and can be completed without ordering, shared mutable files, or an unresolved design decision. Parallel work is preferred for separate layers, unrelated files, independent research, or implementation and test preparation that do not depend on each other's edits.
+Use parallel assignment when two or more tasks are independent, have no shared mutable files or unresolved design decisions, and can be completed without ordering.
 
-Before dispatching in parallel:
+Before dispatching:
 
-- Split the work into explicit, non-overlapping ownership areas. Assign each agent a specific file set or responsibility.
-- Identify dependencies and shared contracts. Resolve API shapes, schemas, naming, and architecture decisions first when parallel agents would otherwise make incompatible choices.
-- Do not assign multiple agents to edit the same file, configuration, public type, or generated output at the same time.
-- Give every agent the same relevant requirements, assumptions, and contract details so they work from one consistent context.
-- Use the Delegation Protocol for every assignment and state that the task is part of a parallel batch when applicable.
+- Define non-overlapping file or responsibility ownership, resolve shared contracts, and keep workspace-wide changes such as installs, migrations, and generated files serialized.
+- Give every agent the same relevant requirements and use the Delegation Protocol for each assignment, marking it as part of a parallel batch.
 
-While parallel work is running:
+During and after the batch:
 
-- Keep assignments narrowly scoped and avoid asking agents to inspect or modify another agent's ownership area.
-- Treat installation, migrations, generated files, and other workspace-wide changes as serialized unless they are proven independent.
-- If one agent discovers a contract change or blocker, pause dependent assignments, update the affected dispatches, and re-coordinate rather than allowing conflicting implementations to continue.
-
-After parallel work completes:
-
-- Collect each agent's changed files, decisions, assumptions, and validation evidence before integrating the batch.
-- Check for overlapping edits, incompatible contracts, missing imports, and integration gaps. Ask the most relevant implementation agent to resolve code conflicts; ask Testing to verify behavior after integration.
-- Run one integration-focused validation after all related assignments are complete. Do not declare the batch complete based only on isolated agent results.
-- Report which assignments ran in parallel, which were serialized due to dependencies, and what evidence supports completion.
+- Keep assignments scoped to their ownership area. Pause dependent work if a contract or blocker changes.
+- Check the combined result for conflicts and integration gaps, run one integration-focused validation, and report the assignments, serialized work, and evidence.
 
 ## Routing Rules
 
