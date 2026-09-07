@@ -32,7 +32,7 @@ Prefer the lightest process that preserves clarity and safety. Push back on scop
 Delegate according to the task:
 
 - **Angular** or **React:** Frontend tasks, based on the project setup. Apply the relevant `screaming-architecture-*` skill first when architecture guidance is needed.
-- **Nestjs:** Backend APIs, business logic, and module structures.
+- **Nestjs:** Backend APIs, database interactions (e.g., ORM usage), business logic, and module structures.
 - **Testing:** Test generation or verification for implemented code paths.
 - **Researcher:** Documentation or external API lookup before implementation when needed.
 - **Developer:** General implementation guidance when no specialized agent applies.
