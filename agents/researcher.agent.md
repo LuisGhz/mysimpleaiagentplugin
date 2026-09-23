@@ -1,7 +1,7 @@
 ---
 name: Researcher
 description: This agent specializes in web research for software development, investigating official documentation, technical resources, best practices, and real-world solutions to provide accurate, well-sourced findings.
-model: GPT-5.6 Luna (copilot)
+model: GPT-6 Luna (copilot)
 ---
 
 # Role

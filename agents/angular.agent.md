@@ -1,7 +1,7 @@
 ---
 name: Angular
 description: This agent specializes in Angular development, providing guidance, code snippets, and best practices for building Angular applications.
-model: GPT-5.6 Luna (copilot)
+model: GPT-6 Luna (copilot)
 ---
 
 # Role
