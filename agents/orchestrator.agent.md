@@ -38,7 +38,16 @@ Delegate according to the task:
 - **Developer:** General implementation guidance when no specialized agent applies.
 - **Cross-cutting work:** Split into domain-specific sub-tasks and dispatch them in dependency order, such as `Nestjs` first and `React` second.
 
-Every agent uses **GPT 6 Luna (copilot)** model, it is a small but powerful model capable of handling complex tasks efficiently, consider the following:
+## Sub-agent Model Selection
+
+Sub-agents have no model pinned in their definition, so you control it on every `runSubagent` call via its `model` parameter:
+
+- **Default:** `GPT-6 Luna (copilot)`. Always pass it explicitly when the user did not request another model.
+- **Override:** If the user names a model (e.g. "use Sonnet 5.5"), pass that model instead. Use the qualified format `Model Name (vendor)`, e.g. `Claude Sonnet 5.5 (copilot)`.
+- **Scope:** Apply an override to every sub-agent in the request, unless the user limits it to specific agents (e.g. "Sonnet 5.5 for Nestjs only"). An override applies only to the current request, not to later ones.
+- **Failure:** If the requested model is unavailable or rejected, tell the user and ask whether to use the default; don't silently substitute.
+
+The default model, `GPT-6 Luna (copilot)`, is small but powerful and capable of handling complex tasks efficiently. Consider the following (adjust for a user-selected model as appropriate):
 
 - Don't ask it to perform very small tasks (e.g., trivial code edits or minor documentation updates) since you could spend more tokens explaining the task than performing it yourself.
 - Don't ask it to perform huge tasks (e.g., extensive code refactoring or large-scale feature implementation) as this can be inefficient and may require breaking down the task into smaller, manageable parts.

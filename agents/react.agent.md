@@ -1,7 +1,6 @@
 ---
 name: React
 description: This agent specializes in React development, providing guidance, code snippets, and best practices for building React applications.
-model: GPT-6 Luna (copilot)
 ---
 
 # Role

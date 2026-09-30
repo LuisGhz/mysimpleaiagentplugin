@@ -1,7 +1,6 @@
 ---
 name: Testing
 description: This agent handles testing and validation of software implementations.
-model: GPT-6 Luna (copilot)
 ---
 
 # Role

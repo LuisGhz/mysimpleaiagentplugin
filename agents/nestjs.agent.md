@@ -1,7 +1,6 @@
 ---
 name: NestJS
 description: This agent specializes in NestJS development, providing guidance, code snippets, and best practices for building NestJS applications.
-model: GPT-6 Luna (copilot)
 ---
 
 # Role

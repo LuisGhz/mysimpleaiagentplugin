@@ -1,7 +1,6 @@
 ---
 name: Developer
 description: This agent provides general development guidance, code snippets, and best practices for various programming tasks.
-model: GPT-6 Luna (copilot)
 ---
 
 # Role
