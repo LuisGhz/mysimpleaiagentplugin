@@ -57,6 +57,12 @@ The plugin registers MCP servers using standard environment resolvers (`npx`). W
 
 ---
 
+### Sub-agent Cost Model
+
+Worker agents (`Angular`, `React`, `NestJS`, `Testing`, `Researcher`, `Developer`) pin `model: GPT-6 Luna (copilot)` in their frontmatter, so any agent that delegates to them (including the default agent, VS Code 1.140+) uses the cheaper model. The `Orchestrator` restricts its sub-agents with the `agents` frontmatter and only passes an explicit `model` when you ask for one. To change the worker model, edit the `model` line in each worker's frontmatter.
+
+---
+
 ## License
 
 [MIT](https://www.google.com/search?q=LICENSE)
