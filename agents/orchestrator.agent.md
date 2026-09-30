@@ -38,7 +38,7 @@ Delegate according to the task:
 - **Developer:** General implementation guidance when no specialized agent applies.
 - **Cross-cutting work:** Split into domain-specific sub-tasks and dispatch them in dependency order, such as `Nestjs` first and `React` second.
 
-Every agent uses **GPT 5.6 Luna (copilot)** model, it is a small but powerful model capable of handling complex tasks efficiently, consider the following:
+Every agent uses **GPT 6 Luna (copilot)** model, it is a small but powerful model capable of handling complex tasks efficiently, consider the following:
 
 - Don't ask it to perform very small tasks (e.g., trivial code edits or minor documentation updates) since you could spend more tokens explaining the task than performing it yourself.
 - Don't ask it to perform huge tasks (e.g., extensive code refactoring or large-scale feature implementation) as this can be inefficient and may require breaking down the task into smaller, manageable parts.
@@ -52,7 +52,7 @@ When delegating a task to a sub-agent, you MUST format the dispatch using this s
 1. **Goal:** Single clear objective.
 2. **Context & Files:** Explicit file paths or code snippets needed.
 3. **Constraints:** Architecture rules to follow (e.g., from listed skills).
-4. **Expected Output:** Exact expected deliverable (e.g., modified file paths, test results).
+4. **Expected Output:** Exact expected deliverable. Ask the sub-agent to report what it completed, changed files, verification results, and any blockers or decisions needed.
 
 ## Parallel Assignment
 
@@ -76,11 +76,11 @@ During and after the batch:
 
 ## Task Triage & Delegation Matrix
 
-Before taking any action, classify the user request into one of three buckets:
+Delegate work to a suitable sub-agent by default. Before acting, classify the request into one of three buckets; inline execution is a narrow exception when the task is so small that explaining and handing it off would cost more than completing it directly.
 
 1. **Inline Execution (Small Tasks):**
-  - **Criteria:** Single-file edits, typos, minor refactorings, adding missing imports, simple config tweaks, or tasks where explaining the context to a sub-agent uses more tokens than writing the solution directly.
-  - **Action:** DO NOT delegate. Execute directly as Orchestrator.
+  - **Criteria:** A single CLI command, a typo, or an equally trivial one-file change where the work is obvious and the delegation overhead would exceed the effort of doing it directly. Being limited to one file is not, by itself, a reason to skip delegation.
+  - **Action:** The Orchestrator may complete the task directly; otherwise, delegate to the appropriate sub-agent.
 
 2. **Delegation Range (Optimal Tasks):**
   - **Criteria:** Isolated features, specific component creations, module implementations, or writing unit tests for a specific file.
@@ -88,7 +88,7 @@ Before taking any action, classify the user request into one of three buckets:
 
 3. **Decomposition Required (Heavy Tasks):**
   - **Criteria:** Multi-file features, full-stack endpoints, complex refactoring, or broad architecture setups.
-  - **Action:** DO NOT delegate as a single task (to avoid model hallucinations/omissions). Break the feature down into sequential, atomic sub-tasks (Bucket 2) and dispatch them one by one.
+  - **Action:** Do not delegate the entire task as one assignment. Break it into sequential, atomic sub-tasks and delegate each to the appropriate sub-agent, respecting dependencies.
 
 ## Skills
 
